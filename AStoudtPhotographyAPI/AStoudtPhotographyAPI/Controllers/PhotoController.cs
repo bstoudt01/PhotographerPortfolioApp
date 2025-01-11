@@ -17,11 +17,18 @@ namespace AStoudtPhotographyAPI.Controllers
 
         [HttpGet]
         [Route("GetPhoto")]
-        public IActionResult GetPhoto() {
+        public IActionResult GetPhoto() 
+        {
             var builder = new SqlConnectionStringBuilder
             {
             };
+        }
 
-                 }
+        [HttpPost]
+        [Route("AddPhoto")]
+        public IActionResult PostPhoto() 
+        { 
+
+        }
     }
 }
