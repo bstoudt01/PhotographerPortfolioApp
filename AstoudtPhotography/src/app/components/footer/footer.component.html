@@ -1,0 +1,20 @@
+<!--Footer-->
+<footer id="landing-footer" class="clearfix">
+    <div class="row clearfix">
+  
+        <p id="copyright" class="col-2">{{footer.copyrightTitle}}</p>
+  
+        <!--Social Icons in Footer-->
+        <ul class="col-2 social-icons">
+            @for (socialMedia of footer.SocialMedia; track socialMedia) {
+            <li>
+                <a target="_blank" title="{{socialMedia.title}}" href="{{socialMedia.link}}">
+                    <i class="fa {{socialMedia.icon}} fa-1x"></i><span>{{socialMedia.title}}</span>
+                </a>
+            </li>
+            }
+        </ul>
+        <!--End of Social Icons in Footer-->
+    </div>
+  </footer>
+  <!--End of Footer-->
