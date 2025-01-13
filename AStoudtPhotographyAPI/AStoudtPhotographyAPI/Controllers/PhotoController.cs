@@ -23,8 +23,17 @@ namespace AStoudtPhotographyAPI.Controllers
             _photoRepository = photoRepository;
         }
 
-        [HttpPost]
-        [Route("AddPhoto")]
+        /// <summary>
+        /// Upload Photos
+        /// </summary>
+        /// <returns>Session ID, Client ID, and Photo Count of photos uploaded</returns>
+        /// <response code="200">Returns the newly created Session ID, Client ID, and Photo Count</response>
+        /// <response code="400">Returns the list of errors</response>
+        /// <response code="409">Returns response if there was a conflic with saving.</response>
+        [HttpPost("AddPhoto")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> PostPhotoAsync(AddPhotoRequest photoMetadata)
         {
             try
