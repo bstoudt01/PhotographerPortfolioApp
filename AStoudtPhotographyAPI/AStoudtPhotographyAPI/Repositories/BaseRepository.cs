@@ -4,7 +4,7 @@ namespace AStoudtPhotographyAPI.Repositories
 {
     public abstract class BaseRepository
     {
-        private readonly string _connectionString;
+        private readonly string _connectionString = string.Empty;
 
         public BaseRepository(IConfiguration configuration)
         {

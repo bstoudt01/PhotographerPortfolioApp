@@ -1,36 +1,42 @@
-﻿namespace AStoudtPhotographyAPI.Repositories
+﻿using AStoudtPhotographyAPI.Models;
+using AStoudtPhotographyAPI.Utilities;
+
+namespace AStoudtPhotographyAPI.Repositories
 {
-    public class PhotoRepository : BaseRepository
+    public class PhotoRepository : BaseRepository, IPhotoRepository
     {
         public PhotoRepository(IConfiguration config) : base(config) { }
 
-        //GET All Photos By Gallery
+        //GET All Photos By Gallery that returns the gallery model
 
-        //GET Single/All Photos
-        //return images requested
+        //GET Single/All Photos ( array of? int/string? ID, GalleryId, ClientId, PhotographerId) 
 
-        //POST byteArray? (single photos only? the data could be VERY LARGE, or is there a reason not to?) 
-        //Validations
-        //validate incoming data properties exists on object, where required
-        //validate photographerId exists in db
-        //verify clientId exists in db
-        //validate galleryId exists in db
+        //POST New Photo Uploads
+        public async Task Add(Photo photo)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO dbo.Photo (SessionID, ClientID, GalleryID, FileLocation, IsPrivate, CreatedDateTime)
+                        VALUES (@SessionID, @ClientID, @GalleryID, @FileLocation, @IsPrivate, @CreatedDateTime)";
 
-        //If file size is larger the ?X? then
-        //--create original / print size (10112204C3Original)
-        //--create web/socialMedia sized version (10112204C3Web)
-        //ELSE
-        //--create original... then in the controller, handle the logic so that it pulls the correct fileName
-        //place into structured folder
+                    //cmd.Parameters.AddWithValue("@ID", photo.Id);
+                    DbUtilities.AddParameter(cmd, "@SessionID", photo.SessionId);
+                    DbUtilities.AddParameter(cmd, "@ClientID", photo.ClientId);
+                    DbUtilities.AddParameter(cmd, "@GalleryID", photo.GalleryId);
+                    DbUtilities.AddParameter(cmd, "@FileLocation", photo.FileLocation);
+                    DbUtilities.AddParameter(cmd, "@IsPrivate", photo.IsPrivate);
+                    DbUtilities.AddParameter(cmd, "@CreatedDateTime", DateTime.Now);
 
-        //SET SQL properties
-        //SET Created DateTime
-        //SET PhotoPath
-        //Is marked Public?
+                    await cmd.ExecuteNonQueryAsync();
 
-        //Create SQL record
+                   // photo.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
 
-        //Return Success Message
-        //End Function
     }
 }
