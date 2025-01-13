@@ -23,19 +23,8 @@ namespace AStoudtPhotographyAPI.Controllers
             _photoRepository = photoRepository;
         }
 
-        //TODO: GET Photos
-        //[HttpGet]
-        //[Route("GetPhoto")]
-        //public IActionResult GetPhoto() 
-        //{
-        //    var builder = new SqlConnectionStringBuilder
-        //    {
-        //    };
-        //}
-
         [HttpPost]
         [Route("AddPhoto")]
-        //[RequestSizeLimit(1_000_000)]
         public async Task<IActionResult> PostPhotoAsync(AddPhotoRequest photoMetadata)
         {
             try
@@ -88,5 +77,15 @@ namespace AStoudtPhotographyAPI.Controllers
             //TODO: pull in client name and session location
             return Ok($"Successfully uploaded {photoMetadata.Photos.Count} images for Client {photoMetadata.ClientId} at the {photoMetadata.SessionId} session.");
         }
+
+        //TODO: GET Photos
+        //[HttpGet]
+        //[Route("GetPhoto")]
+        //public IActionResult GetPhoto() 
+        //{
+        //    var builder = new SqlConnectionStringBuilder
+        //    {
+        //    };
+        //}
     }
 }
