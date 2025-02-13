@@ -10,12 +10,12 @@ namespace AStoudtPhotographyAPI.Validation
             ValidatedResult result = new ValidatedResult();
             result.Success = true;
             //call repo to make sure int value exists in db
-            //async await Client
-            //Photographer
-            //Photo
-            //Gallery
+            //async await Client exists
+            //Photographer exists
+            //Photo exists
+            //Gallery exists
+            //Image DOES NOT exist
 
-            //Image?
             return result;
         }
 

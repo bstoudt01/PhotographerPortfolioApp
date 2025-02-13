@@ -48,7 +48,7 @@ namespace AStoudtPhotographyAPI.Controllers
                 var validateFiles = _fileValidation.ValidateFile(photoMetadata.Photos);
                 if (!validateFiles.Success)
                 {
-                    return BadRequest(validateFiles.Errors.ToString());
+                    return BadRequest(validateFiles.Errors);
                 }
 
                 //Process Files

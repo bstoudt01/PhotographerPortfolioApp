@@ -36,7 +36,7 @@ namespace AStoudtPhotographyAPI.Validation
                 }
             }
 
-            result.Success = true;
+            result.Success = !result.Errors.Any();
             return result;
         }
 
