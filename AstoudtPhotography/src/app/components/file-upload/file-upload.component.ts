@@ -24,6 +24,7 @@ export class FileUploadComponent {
     const filesList = (target as HTMLInputElement).files;
     if (!filesList) return;
     this.constructToUploadFilesList(filesList);
+    this.createImagePreview(filesList);
   }
 
   uploadFiles(): void {
@@ -31,6 +32,20 @@ export class FileUploadComponent {
 
     this.executeFileUpload(requestsList);
   }
+
+  private createImagePreview(filesList: FileList): void {
+    Array.from(filesList).forEach((item: File) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(item);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target?.result as string;
+        const preview = document.getElementById('file-preview');
+        if (preview) preview.setAttribute('src', img.src);
+      };
+      
+    });
+}
 
   private constructRequestsChain(): any {
     return this.toUploadFilesList.map((item, index) => {

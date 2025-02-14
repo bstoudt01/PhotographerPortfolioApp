@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ImageService } from '../../services/image/image.service'
+//import { ImageService } from '../../services/image/image.service'
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 @Component({
   selector: 'app-admin',
